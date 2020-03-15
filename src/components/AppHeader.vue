@@ -4,10 +4,15 @@
       <div class="box-item item-logo" @click="goHome">
         <img src="@/assets/logo.png" alt="logo" />
       </div>
-      <div class="box-item item-title">简单商城</div>
+      <div class="box-item item-title">商城</div>
     </div>
     <div class="header-box box-right">
-      <div class="box-item item-cart" v-if="userName" @click="goCart">
+      <div class="box-item">
+        <el-button type="text" v-if="currentPath !== '/'">
+          <router-link tag="span" to="/">首页</router-link>
+        </el-button>
+      </div>
+      <div class="box-item item-cart" v-if="userName && currentPath !== '/cart'" @click="goCart">
         <i v-if="cartCount" class="el-icon-shopping-cart-full"></i>
         <i v-else class="el-icon-shopping-cart-2"></i>
       </div>
@@ -36,6 +41,9 @@ export default {
   },
   computed: {
     ...mapState(['userName', 'cartCount']),
+    currentPath: function() {
+      return this.$route.path || '';
+    },
   },
   methods: {
     login() {
@@ -77,7 +85,7 @@ export default {
     }
     .box-item {
       &.item-logo {
-        margin-right: 4px;
+        margin-right: 8px;
         height: 38px;
         cursor: pointer;
         > img {

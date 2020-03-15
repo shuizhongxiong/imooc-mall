@@ -35,6 +35,11 @@ router.post('/del', function(req, res ,next) {
         Util.ErrorHandle(res, err);
         return;
       }
+      const cartCount = +req.cookies.cartCount;
+      res.cookie('cartCount', cartCount - 1, {
+        path: '/',
+        maxAge: 1000 * 60 * 60 * 2
+      });
       Util.SuccessHandle(res);
     });
 });

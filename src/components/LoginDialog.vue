@@ -55,7 +55,9 @@ export default {
       this.show = newVal;
       if (newVal) {
         this.$nextTick(() => {
-          this.$refs.userNameRef.getInput().focus();
+          if (this.$refs.userNameRef) {
+            this.$refs.userNameRef.getInput().focus();
+          }
         });
       }
     },

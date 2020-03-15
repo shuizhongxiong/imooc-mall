@@ -29,11 +29,13 @@
     <el-table
       tooltip-effect="light"
       v-loading="loading"
-      height="540"
+      :height="tableHeight"
       :data="list"
       @sort-change="changeSort($event)"
     >
-      <el-table-column prop="productId" label="ID" sortable="custom" width="120"></el-table-column>
+      <el-table-column label="序号" width="120" align="center">
+        <template slot-scope="scope">{{ (curentPage - 1) * limit + scope.$index + 1 }}</template>
+      </el-table-column>
       <el-table-column label="商品" show-overflow-tooltip>
         <template slot-scope="{ row }">
           <product-item
@@ -78,7 +80,6 @@ export default {
       list: [],
       total: 0,
       curentPage: 1,
-      limit: 10,
       sortKey: '',
       sortType: '', // ascending-升序 descending-降序
       minPrice: '',
@@ -90,6 +91,12 @@ export default {
     filterDisabled: function() {
       return this.loading || this.list.length === 0;
     },
+    limit: function() {
+      return Math.floor((innerHeight - 235) / 85);
+    },
+    tableHeight: function() {
+      return this.limit * 85 + 59;
+    },
   },
   mounted() {
     this.getGoodsList();
@@ -99,6 +106,7 @@ export default {
       return require(`@/assets/images/product/${name}`);
     },
     async getGoodsList() {
+      this.list = [];
       this.loading = true;
       const param = {
         start: (this.curentPage - 1) * this.limit,
@@ -149,13 +157,20 @@ export default {
     async handleCart(productId) {
       const res = await this.$post(`/imall/goods/addCart`, { productId });
       if (res && res.code === 200) {
+        const count = this.$store.state.cartCount;
+        if (count === 0) {
+          this.$store.commit('changeCartCount', count + 1);
+        }
+
         this.$confirm('加入购物车成功', '提示', {
-          confirmButtonText: '继续购物',
-          cancelButtonText: '查看购物车',
+          confirmButtonText: '查看购物车',
+          cancelButtonText: '继续购物',
           type: 'success',
-        }).catch(() => {
-          this.$router.push('/cart').catch(() => {});
-        });
+        })
+          .then(() => {
+            this.$router.push('/cart').catch(() => {});
+          })
+          .catch(() => {});
       }
     },
   },

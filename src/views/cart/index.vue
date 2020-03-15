@@ -1,9 +1,5 @@
 <template>
   <div class="cart-list">
-    <el-breadcrumb class="list-breadcrumb" separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>购物车</el-breadcrumb-item>
-    </el-breadcrumb>
     <el-table
       ref="tableRef"
       height="580"
@@ -48,6 +44,13 @@
           </el-button>
         </template>
       </el-table-column>
+      <template slot="empty">
+        <span>您的购物车是空的，赶紧去</span>
+        <el-button type="text">
+          <router-link tag="span" to="/">添加商品</router-link>
+        </el-button>
+        <span>吧～</span>
+      </template>
     </el-table>
   </div>
 </template>
@@ -86,7 +89,9 @@ export default {
         const checkedList = this.list.filter(d => d.checked === 1);
         if (checkedList.length > 0) {
           checkedList.forEach((d, i) => {
-            this.$refs.tableRef.toggleRowSelection(d, true);
+            if (this.$refs.tableRef) {
+              this.$refs.tableRef.toggleRowSelection(d, true);
+            }
             // hack toggleRowSelection 会调用 selection-change 方法造成死循环
             if (i === checkedList.length - 1) {
               this.selectionDone = true;
@@ -95,7 +100,9 @@ export default {
         } else {
           this.selectionDone = true;
         }
-        this.$refs.tableRef.doLayout();
+        if (this.$refs.tableRef) {
+          this.$refs.tableRef.doLayout();
+        }
       });
     },
     getSummaries(param) {
@@ -136,15 +143,17 @@ export default {
       return sums;
     },
     handleDelete(data) {
-      this.$confirm('你确定删除此条数据么?', '提示', {
+      this.$confirm('您确定删除此条数据么?', '提示', {
         type: 'warning',
-      }).then(async () => {
-        const res = await this.$post('/imall/carts/del', { productId: data.productId });
-        if (res && res.code === 200) {
-          this.getCartList();
-          this.$message.success('删除成功');
-        }
-      });
+      })
+        .then(async () => {
+          const res = await this.$post('/imall/carts/del', { productId: data.productId });
+          if (res && res.code === 200) {
+            this.getCartList();
+            this.$message.success('删除成功');
+          }
+        })
+        .catch(() => {});
     },
     async handleCountChange(value, productId) {
       const params = {
@@ -157,18 +166,12 @@ export default {
       if (!this.selectionDone) {
         return;
       }
-      await this.$post('/imall/carts/checked', {
-        productIds: data.map(d => d.productId),
+      const productIds = data.map(d => d.productId);
+      this.list.forEach(d => {
+        d.checked = productIds.includes(d.productId) ? 1 : 0;
       });
+      await this.$post('/imall/carts/checked', { productIds });
     },
   },
 };
 </script>
-
-<style lang="less" scoped>
-.cart-list {
-  .list-breadcrumb {
-    margin-bottom: 12px;
-  }
-}
-</style>
