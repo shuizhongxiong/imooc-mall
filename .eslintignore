@@ -1,0 +1,11 @@
+node_modules/
+**/*.spec.*
+**/style/
+*.html
+/components/test/*
+es/
+lib/
+dist/
+package.json
+server
+demo-server

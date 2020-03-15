@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+a:hover,
+input {
+  text-decoration: none;
+}
+
+/* 清除浮动代码 */
+.clearfloat:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+/* ==for IE6/7 Maxthon2== 触发 hasLayout */
+.clearfloat {
+  zoom: 1;
+}
+
+/* 功能通用 */
+.hide {
+  display: none;
+}
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bg-img {
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-size: 100% auto;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+.black {
+  color: #000;
+}
+.grey {
+  color: #ccc;
+}
