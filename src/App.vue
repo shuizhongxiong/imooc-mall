@@ -15,13 +15,13 @@ import AppHeader from '@/components/AppHeader';
 
 export default {
   name: 'app',
+  components: {
+    AppHeader,
+  },
   provide() {
     return {
       reload: this.reload,
     };
-  },
-  components: {
-    AppHeader,
   },
   data() {
     return {

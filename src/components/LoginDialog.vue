@@ -8,13 +8,14 @@
   >
     <el-form :model="formData" label-width="70px">
       <el-form-item label="用户名：" prop="userName">
-        <el-input ref="userNameRef" v-model="formData.userName"></el-input>
+        <el-input ref="userNameRef" v-model="formData.userName" placeholder="admin"></el-input>
       </el-form-item>
       <el-form-item label="密码：" prop="userPwd">
         <el-input
           type="password"
           v-model="formData.userPwd"
           autocomplete="off"
+          placeholder="123"
           @keyup.enter.native="submitForm"
         ></el-input>
       </el-form-item>
