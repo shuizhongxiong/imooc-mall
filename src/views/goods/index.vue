@@ -88,13 +88,13 @@ export default {
     };
   },
   computed: {
-    filterDisabled: function() {
+    filterDisabled() {
       return this.loading || this.list.length === 0;
     },
-    limit: function() {
+    limit() {
       return Math.floor((innerHeight - 235) / 85);
     },
-    tableHeight: function() {
+    tableHeight() {
       return this.limit * 85 + 59;
     },
   },
@@ -116,7 +116,7 @@ export default {
         minPrice: this.filterParams.minPrice,
         maxPrice: this.filterParams.maxPrice,
       };
-      const res = await this.$get('/imall/goods', param);
+      const res = await this.$get('/api/goods', param);
       this.loading = false;
       if (res && res.code === 200) {
         const result = res.result;
@@ -155,7 +155,7 @@ export default {
       }
     },
     async handleCart(productId) {
-      const res = await this.$post(`/imall/goods/addCart`, { productId });
+      const res = await this.$post(`/api/goods/addCart`, { productId });
       if (res && res.code === 200) {
         const count = this.$store.state.cartCount;
         if (count === 0) {

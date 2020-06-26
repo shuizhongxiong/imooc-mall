@@ -69,7 +69,7 @@ export default {
         return;
       }
       this.btnLoading = true;
-      const res = await this.$post('/imall/users/login', this.formData);
+      const res = await this.$post('/api/users/login', this.formData);
       this.btnLoading = false;
       if (res && res.code === 200) {
         this.$store.commit('changeUserName', res.result.userName);

@@ -6,13 +6,10 @@ module.exports = {
     host: '0.0.0.0',
     port: 4000,
     proxy: {
-      '/imall': {
+      '/api': {
         target: 'http://localhost:3000/',
         changeOrigin: true,
         ws: true,
-        pathRewrite: {
-          '^/imall': '',
-        },
       },
     },
   },

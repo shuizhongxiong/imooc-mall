@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState(['userName', 'cartCount']),
-    currentPath: function() {
+    currentPath() {
       return this.$route.path || '';
     },
   },
@@ -50,7 +50,7 @@ export default {
       this.$store.commit('changeLoginVisible', true);
     },
     async logout() {
-      const res = await this.$post('/imall/users/logout');
+      const res = await this.$post('/api/users/logout');
       if (res && res.code === 200) {
         this.$store.commit('changeUserName', '');
         this.$store.commit('changeCartCount', 0);

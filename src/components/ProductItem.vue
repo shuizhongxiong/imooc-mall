@@ -24,7 +24,7 @@ export default {
     },
   },
   computed: {
-    imgList: function() {
+    imgList() {
       return [this.img];
     },
   },

@@ -79,7 +79,7 @@ export default {
       this.isInit = true;
       this.list = [];
       this.loading = true;
-      const res = await this.$get('/imall/carts/list');
+      const res = await this.$get('/api/carts/list');
       this.loading = false;
       if (res && res.code === 200) {
         this.list = res.result || [];
@@ -147,7 +147,7 @@ export default {
         type: 'warning',
       })
         .then(async () => {
-          const res = await this.$post('/imall/carts/del', { productId: data.productId });
+          const res = await this.$post('/api/carts/del', { productId: data.productId });
           if (res && res.code === 200) {
             this.getCartList();
             this.$message.success('删除成功');
@@ -160,7 +160,7 @@ export default {
         productId,
         productNum: value,
       };
-      await this.$post('/imall/carts/edit', params);
+      await this.$post('/api/carts/edit', params);
     },
     async handleSelectionChange(data) {
       if (!this.selectionDone) {
@@ -170,7 +170,7 @@ export default {
       this.list.forEach(d => {
         d.checked = productIds.includes(d.productId) ? 1 : 0;
       });
-      await this.$post('/imall/carts/checked', { productIds });
+      await this.$post('/api/carts/checked', { productIds });
     },
   },
 };
