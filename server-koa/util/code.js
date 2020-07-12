@@ -1,12 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-06-21 18:19:27
- * @LastEditTime: 2020-06-26 11:31:41
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: /imooc-mall/server-koa/util/code.js
- */
-
 // 统一 code 码
 
 module.exports = {

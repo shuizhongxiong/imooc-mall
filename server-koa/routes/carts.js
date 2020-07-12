@@ -1,12 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-06-21 17:48:59
- * @LastEditTime: 2020-06-26 11:23:51
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /imooc-mall/server-koa/routes/carts.js
- */
-
 const router = require('koa-router')();
 const User = require('../models/user');
 const Util = require('../util');

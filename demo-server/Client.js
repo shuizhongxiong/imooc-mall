@@ -1,8 +1,8 @@
 let http = require('http');
 
-http.get('http://www.imooc.com/u/card', (res) => {
+http.get('https://www.baidu.com/', res => {
   let data = '';
-  res.on('data', (chunk) => {
+  res.on('data', chunk => {
     data += chunk;
   });
 

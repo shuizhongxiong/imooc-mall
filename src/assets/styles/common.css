@@ -16,7 +16,7 @@ input {
 .clearfloat:after {
   display: block;
   clear: both;
-  content: "";
+  content: '';
   visibility: hidden;
   height: 0;
 }
