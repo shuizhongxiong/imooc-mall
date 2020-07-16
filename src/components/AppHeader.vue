@@ -4,7 +4,7 @@
       <div class="box-item item-logo" @click="goHome">
         <img src="@/assets/logo.png" alt="logo" />
       </div>
-      <div class="box-item item-title">商城</div>
+      <div class="box-item item-title">Demo Mall</div>
     </div>
     <div class="header-box box-right">
       <div class="box-item">

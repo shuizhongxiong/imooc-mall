@@ -2,21 +2,26 @@
   <div id="app">
     <el-container>
       <el-header>
-        <app-header></app-header>
+        <app-header />
       </el-header>
       <el-main>
         <router-view v-if="isRouterAlive" />
       </el-main>
+      <el-footer>
+        <app-footer />
+      </el-footer>
     </el-container>
   </div>
 </template>
 <script>
 import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
 
 export default {
   name: 'app',
   components: {
     AppHeader,
+    AppFooter,
   },
   provide() {
     return {
